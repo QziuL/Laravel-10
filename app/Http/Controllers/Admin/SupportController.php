@@ -3,22 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreUpdateSupport;
-use App\Models\Support;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Support;
 
 class SupportController extends Controller
 {
-    public function index(Support $support)
+    private $support;
+
+    public function __construct()
     {
-        $supports = $support->all();
+        $this->support = new Support();
+    }
+
+    public function index()
+    {
+        $supports = $this->support->all();
 
         return view('admin.supports.index', compact('supports'));
     }
 
-    public function show(string $id, Support $support)
+    public function show(string $id)
     {
-        if(!$support = $support->find($id))
+        if(!$support = $this->support->find($id))
         {
             return redirect()->route('supports.index');
         }
@@ -31,19 +37,19 @@ class SupportController extends Controller
         return view('admin.supports.create');
     }
 
-    public function store(Support $support, StoreUpdateSupport $request)
+    public function store(StoreUpdateSupport $request)
     {
         $data = $request->validated();
         $data['status'] = 'a';
 
-        $support = $support->create($data);
+        $this->support = $this->support->create($data);
         
         return redirect()->route('supports.index');
     }
 
-    public function edit(string $id, Support $support)
+    public function edit(string $id)
     {
-        if(!$support = $support->find($id))
+        if(!$support = $this->support->find($id))
         {
             return redirect()->back();
         }
@@ -51,26 +57,26 @@ class SupportController extends Controller
         return view('admin.supports.edit', compact('support'));
     }
 
-    public function update(string $id, StoreUpdateSupport $request, Support $support)
+    public function update(string $id, StoreUpdateSupport $request)
     {   
-        if(!$support = $support->find($id))
+        if(!$this->support = $this->support->find($id))
         {
             return redirect()->back();
         }
 
-        $support = $support->update($request->validated());
-        //$support = $support->update($request->only(['subject', 'body']));
+        $this->support = $this->support->update($request->validated());
+        //$support = $support->update($this->request->only(['subject', 'body']));
 
         return redirect()->route('supports.index');
     }
 
-    public function destroy(string $id, Support $support)
+    public function destroy(string $id)
     {
-        if(!$support = $support->find($id))
+        if(!$this->support = $this->support->find($id))
         {
             return redirect()->back();
         }
-        $support->delete();
+        $this->support->delete();
 
         return redirect()->route('supports.index');
     }
