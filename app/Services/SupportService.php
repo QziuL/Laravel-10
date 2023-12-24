@@ -1,7 +1,7 @@
-<!-- SERVICE LAYER -->
 <?php 
 
 namespace App\Services;
+
 use App\DTO\CreateSupportDTO;
 use App\DTO\UpdateSupportDTO;
 use App\Repositories\SupportRepositoryInterface;
@@ -9,6 +9,8 @@ use stdClass;
 
 class SupportService
 {
+    // SERVICE LAYER
+    
     public function __construct(
         protected SupportRepositoryInterface $repository,
     )
@@ -36,6 +38,6 @@ class SupportService
 
     public function delete(string $id): void
     {
-        return $this->repository->delete($id);
+        $this->repository->delete($id);
     }
 }
