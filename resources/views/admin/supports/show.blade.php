@@ -11,8 +11,6 @@
     </li>
     <li><b>Descrição</b>: {{ $support->body }}</li>
     <form action="{{ route('supports.destroy', $support->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Deletar</button>
+        @include('admin.supports.partials.delete')
     </form>
 </ul>
