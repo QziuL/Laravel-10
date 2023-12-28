@@ -21,11 +21,11 @@ class PaginationPresenter implements PaginationInterface
     {
         return $this->paginator->total() ?? 0;
     }
-    public function isFirstPage(): bool
+    public function onFirstPage(): bool
     {
         return $this->paginator->onFirstPage();
     }
-    public function isLastPage(): bool
+    public function onLastPage(): bool
     {
         return $this->paginator->onLastPage();
     }
@@ -53,6 +53,7 @@ class PaginationPresenter implements PaginationInterface
             {
                 $stdClassObject->{$key} = $value;
             }
+            
             $response = $stdClassObject;
         }
 
