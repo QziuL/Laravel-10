@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
+use App\DTO\Supports\{ CreateSupportDTO, UpdateSupportDTO };
 use App\Http\Requests\StoreUpdateSupport;
 use App\Http\Controllers\Controller;
 use App\Models\Support;

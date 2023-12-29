@@ -1,7 +1,7 @@
 <?php 
 
 namespace App\Repositories;
-use App\DTO\{ CreateSupportDTO, UpdateSupportDTO };
+use App\DTO\Supports\{ CreateSupportDTO, UpdateSupportDTO };
 use App\Models\Support;
 use stdClass;
 
