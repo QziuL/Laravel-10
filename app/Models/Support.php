@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\SupportStatus;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,4 +16,12 @@ class Support extends Model
         'status',
         'body'
     ];
+
+    // PARA MANTER APENAS NOME DO STATUS NO BANCO MESMO EDITANDO UM SUPPORT
+    public function status(): Attribute
+    {
+        return Attribute::make(
+            set: fn (SupportStatus $status) => $status->name,
+        );
+    }
 }
