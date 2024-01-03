@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUpdateSupport;
 use App\Http\Resources\SupportResource;
 use App\Services\SupportService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SupportController extends Controller
 {
@@ -23,9 +24,6 @@ class SupportController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreUpdateSupport $request)
     {
         $support = $this->service->new(CreateSupportDTO::makeFromRequest($request));
@@ -34,27 +32,31 @@ class SupportController extends Controller
         return new SupportResource($support);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        if(!$support = $this->service->findOne($id)) 
+        { 
+            return response()->json(['error' => 'Support Not Found'], 404);    
+            // NO LUGAR DO 404 PODE-SE USAR => 'Response::HTTP_NOT_FOUND'
+        }
+
+        return new SupportResource($support);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        if(!$this->service->findOne($id)) 
+        { 
+            return response()->json(['error' => 'Support Not Found'], 404);
+        }
+
+        $this->service->delete($id);
+
+        return response()->json([], 204); // NO_CONTENT
     }
 }
