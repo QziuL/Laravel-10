@@ -43,9 +43,9 @@ class SupportEloquentORM implements SupportRepositoryInterface
     public function findOne(string $id): stdClass|null
     {
         // se achar, converte em array e transforma num objeto generico
-        if($support = $this->model->find($id)->toArray())
+        if($support = $this->model->find($id))
         {
-            return (object) $support;
+            return (object) $support->toArray();
         }
         
         return null;
