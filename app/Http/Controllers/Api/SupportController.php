@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Adapters\ApiAdapter;
 use App\DTO\Supports\CreateSupportDTO;
 use App\DTO\Supports\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
@@ -26,17 +27,7 @@ class SupportController extends Controller
             filter: $request->filter,
         );
 
-        return SupportResource::collection($supports->items())
-                                ->additional([
-                                    'meta' => [
-                                        'total' => $supports->total(),
-                                        'on_first_page' => $supports->onFirstPage(),
-                                        'on_last_page' => $supports->onLastPage(),
-                                        'current_page' => $supports->currentPage(),
-                                        'next_page' => $supports->getNumberNextPage(),
-                                        'previous_page' => $supports->getNumberPreviousPage(),
-                                    ]
-                                ]);
+        return ApiAdapter::toJson($supports);
     }
 
     public function store(StoreUpdateSupport $request)
