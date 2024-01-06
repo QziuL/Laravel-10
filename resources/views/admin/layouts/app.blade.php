@@ -14,13 +14,10 @@
             @yield('header')
         </head>
         <main>
-            <div class="content">
+            <div>
                 @yield('content')
             </div>
         </main>
-        <footer>
-            #FOOTER#
-        </footer>
     </section>
 </body>
 </html>
