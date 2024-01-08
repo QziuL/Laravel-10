@@ -56,7 +56,7 @@ class SupportController extends Controller
             CreateSupportDTO::makeFromRequest($request)
         );
         
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with('message', 'Sucesso ao cadastrar!');
     }
 
     public function edit(string $id): View
@@ -82,13 +82,13 @@ class SupportController extends Controller
             return redirect()->back();
         }
 
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with('message', 'Sucesso ao editar!');
     }
 
     public function destroy(string $id): RedirectResponse
     {
         $this->service->delete($id);
 
-        return redirect()->route('supports.index');
+        return redirect()->route('supports.index')->with('message', 'Sucesso ao deletar!');
     }
 }
