@@ -1,10 +1,14 @@
-<h1>Nova dúvida</h1>
+@extends('admin.layouts.app')
 
-{{-- CHAMANDO O COMPONENT 'ALERT' --}}
-<x-alert/>
+@section('title', 'Novo Tópico')
 
-<br>
-<a href="{{ route('supports.index') }}">Listar dúvidas</a>
-<form action="{{ route('supports.store') }}" method="POST">
-    @include('admin.supports.partials.form')
-</form>
+@section('header')
+    <h1 class="text-lg text-black-500">Nova dúvida</h1>
+@endsection
+
+@section('content')
+    <a href="{{ route('supports.index') }}" >Listar dúvidas</a>
+    <form action="{{ route('supports.store') }}" method="POST">
+        @include('admin.supports.partials.form')
+    </form>
+@endsection
