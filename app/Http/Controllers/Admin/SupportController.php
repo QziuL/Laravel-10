@@ -34,16 +34,6 @@ class SupportController extends Controller
         return view('admin.supports.index', compact('supports', 'filters'));
     }
 
-    public function show(string $id): View
-    {
-        if(!$support = $this->service->findOne($id))
-        {
-            return redirect()->route('supports.index');
-        }
-        
-        return view('admin.supports.show', compact('support'));
-    }
-
     public function create(): View
     {
         return view('admin.supports.create');
