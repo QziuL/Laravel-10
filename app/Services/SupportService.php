@@ -3,8 +3,7 @@
 namespace App\Services;
 
 use App\DTO\Supports\{ CreateSupportDTO, UpdateSupportDTO};
-use App\Repositories\PaginationInterface;
-use App\Repositories\SupportRepositoryInterface;
+use App\Repositories\Contracts\{PaginationInterface, SupportRepositoryInterface};
 use stdClass;
 
 class SupportService

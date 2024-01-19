@@ -1,7 +1,9 @@
 <?php 
 
 namespace App\Repositories;
+
 use App\DTO\Supports\{ CreateSupportDTO, UpdateSupportDTO };
+use App\Repositories\Contracts\{PaginationInterface, SupportRepositoryInterface};
 use App\Models\Support;
 use stdClass;
 
