@@ -15,6 +15,12 @@ class ReplySupport extends Model
     // pois os nomes não são iguais
     protected $table = 'replies_support';
 
+    protected $fillable = [
+        'user_id',
+        'support_id',
+        'content',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
