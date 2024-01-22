@@ -22,7 +22,7 @@ class ReplySupportController extends Controller
         {
             return redirect()->route('supports.index');
         }
-
+        
         $replies = $this->replyService->getAllBySupportID($id);
         
         return view('admin.supports.replies.replies', compact('support', 'replies'));
