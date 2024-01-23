@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\DTO\Supports\{ CreateSupportDTO, UpdateSupportDTO };
 use App\Repositories\Contracts\{PaginationInterface, SupportRepositoryInterface};
 use App\Models\Support;
+use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class SupportEloquentORM implements SupportRepositoryInterface
@@ -45,7 +46,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
     public function findOne(string $id): stdClass|null
     {
         // se achar, converte em array e transforma num objeto generico
-        if($support = $this->model->find($id))
+        if($support = $this->model->with('user')->find($id))
         {
             return (object) $support->toArray();
         }
@@ -55,6 +56,13 @@ class SupportEloquentORM implements SupportRepositoryInterface
 
     public function delete(string $id): void
     {
+        $support = $this->model->findOrFail($id);
+
+        if(Gate::denies('owner', $support->user->id))
+        {
+            abort(403, 'Not Authorized');
+        }
+
         $this->model->findOrFail($id)->delete();
     }
 
@@ -66,9 +74,14 @@ class SupportEloquentORM implements SupportRepositoryInterface
     }
     public function update(UpdateSupportDTO $dto): stdClass|null
     {
-        if(!$support = $this->model->find($dto->id))
+        if(!$support = $this->model->findOrFail($dto->id))
         {
             return null;
+        }
+
+        if(Gate::denies('owner', $support->user->id))
+        {
+            abort(403, 'Not Authorized');
         }
 
         $support->update( (array) $dto);

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTO\Supports\{ CreateSupportDTO, UpdateSupportDTO};
 use App\Repositories\Contracts\{PaginationInterface, SupportRepositoryInterface};
+use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class SupportService

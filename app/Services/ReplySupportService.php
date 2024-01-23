@@ -2,7 +2,9 @@
 
 namespace App\Services;
 use App\DTO\Replies\CreateReplyDTO;
+use App\Models\ReplySupport;
 use App\Repositories\Contracts\ReplyRepositoryInterface;
+use Illuminate\Support\Facades\Gate;
 use stdClass;
 
 class ReplySupportService 
