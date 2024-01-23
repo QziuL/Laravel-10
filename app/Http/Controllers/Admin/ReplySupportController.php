@@ -16,11 +16,11 @@ class ReplySupportController extends Controller
         protected ReplySupportService $replyService 
     ) {}
 
-    public function index(string $id): View
+    public function index(string $id)
     {
         if(!$support = $this->supportService->findOne($id))
         {
-            return redirect()->route('supports.index');
+            return back();
         }
         
         $replies = $this->replyService->getAllBySupportID($id);
@@ -33,5 +33,12 @@ class ReplySupportController extends Controller
         $this->replyService->createNew(CreateReplyDTO::makeFromRequest($request));
 
         return redirect()->route('replies.index', $request->support_id)->with('message', 'Resposta enviada!');
+    }
+
+    public function destroy(string $supportID, string $replyID)
+    {
+        $this->replyService->delete($replyID);
+
+        return redirect()->route('replies.index', $supportID)->with('message', 'Deletado com sucesso!');
     }
 }

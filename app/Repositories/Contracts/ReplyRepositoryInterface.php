@@ -8,4 +8,5 @@ interface ReplyRepositoryInterface
 {
     public function getAllBySupportID(string $supportID): array;
     public function createNew(CreateReplyDTO $dto): stdClass;
+    public function delete(string $id): bool;
 }

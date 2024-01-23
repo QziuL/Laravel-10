@@ -11,13 +11,18 @@ class ReplySupportService
         protected ReplyRepositoryInterface $repository
     ) {}
 
-    public function getAllBySupportID(string $supportID): array
+    public function getAllBySupportID(string $id): array
     {
-        return $this->repository->getAllBySupportID($supportID);
+        return $this->repository->getAllBySupportID($id);
     }
 
     public function createNew(CreateReplyDTO $dto): stdClass
     {
         return $this->repository->createNew($dto);
+    }   
+
+    public function delete(string $id): bool
+    {
+        return $this->repository->delete($id);
     }   
 }
