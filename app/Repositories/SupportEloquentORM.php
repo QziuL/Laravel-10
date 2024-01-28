@@ -17,6 +17,10 @@ class SupportEloquentORM implements SupportRepositoryInterface
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
         $result = $this->model
+                    ->with(['replies' => function ($query) {
+                        $query->limit(4);
+                        $query->latest();
+                    }])
                     ->where(function ($query) use ($filter){
                         if($filter)
                         {
@@ -25,7 +29,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
                         }
                     })
                     ->paginate($totalPerPage, ['*'], 'page', $page);
-             
+        
         return new PaginationPresenter($result);
     }
 

@@ -17,6 +17,9 @@ class ReplySupport extends Model
     // pois os nomes não são iguais
     protected $table = 'replies_support';
 
+    // quando usar o 'with', trazer o usuario no relacionamento
+    protected $with = ['user'];
+
     protected $fillable = [
         'user_id',
         'support_id',
