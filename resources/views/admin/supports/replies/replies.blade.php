@@ -20,6 +20,7 @@
         <ul>
             <li>Status: <x-status-support :status="$support->status"/></li>
             <li>Descrição: {{ $support->body }}</li>
+            <li>Total respostas: {{ count($replies) }}</li>
         </ul>
 
         <!-- Item Container -->
