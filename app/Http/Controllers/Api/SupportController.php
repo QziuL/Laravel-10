@@ -35,7 +35,7 @@ class SupportController extends Controller
         $support = $this->service->new(CreateSupportDTO::makeFromRequest($request));
 
         // PADRONIZAR RESPONSE
-        return new SupportResource($support);
+        return (new SupportResource($support))->response()->setStatusCode(Response::HTTP_CREATED);
     }
 
     public function show(string $id)

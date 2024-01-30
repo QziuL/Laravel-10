@@ -34,6 +34,13 @@ class ReplySupportApiController extends Controller
     {
         $reply = $this->replyService->createNew(CreateReplyDTO::makeFromRequest($request));
 
-        return new ReplySupportResource($reply);
+        return (new ReplySupportResource($reply))->response()->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function destroy(string $id)
+    {
+        $this->replyService->delete($id);
+
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }
